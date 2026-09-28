@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>El tesoro de Jerht</title>
+<style>
+:root{--bg:#FFF0F5;--card:#FFFAFC;--ink:#5B1F3A;--mute:#A65E7E;--rose:#F08FB1;--soft:#FADCE6;--line:#F3B8CD;--wall:#D48CA9;--floor:#FFF7FA;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:520px;margin:0 auto;padding:24px 16px 40px}
+.hero{text-align:center;padding:8px 8px 18px}
+.hero h1{font:italic 600 34px/1.15 Georgia,"Times New Roman",serif;margin:0 0 10px}
+.hero p{margin:0 auto;max-width:400px;color:var(--mute);font-family:Georgia,serif;font-size:17px;line-height:1.6}
+.hearts{letter-spacing:6px;color:var(--rose);font-size:18px;margin-bottom:8px}
+.map{background:var(--card);border:1.5px dashed var(--rose);border-radius:18px;padding:8px}
+svg{display:block;width:100%;height:auto}
+.w{stroke:var(--wall);stroke-width:3;fill:none;stroke-linecap:round}
+.f{fill:var(--soft);stroke:var(--line);stroke-width:1.2}
+.rn{fill:var(--mute);font-size:11px;font-family:system-ui,sans-serif}
+.leg{fill:none;stroke:var(--rose);stroke-width:2;stroke-dasharray:5 4;stroke-linecap:round;display:none}
+.leg.on{display:block}
+.m circle{fill:var(--soft);stroke:var(--rose);stroke-width:1.5}
+.m text{fill:var(--mute);font:500 12px system-ui,sans-serif}
+.m.done circle{fill:var(--rose);stroke:var(--rose)}
+.m.done text,.m.cur text{fill:var(--ink)}
+.m.cur circle{fill:#F9C4D6;stroke:var(--ink);stroke-width:2}
+.x line{stroke:var(--line);stroke-width:5;stroke-linecap:round}
+.x.cur line,.x.done line{stroke:var(--rose)}
+.card{background:var(--card);border-radius:18px;padding:20px;margin-top:16px;border:1px solid var(--line)}
+.prog{color:var(--rose);letter-spacing:4px;font-size:16px;margin-bottom:6px}
+.prog .off{color:var(--line)}
+h2{font:italic 600 23px/1.2 Georgia,serif;margin:0 0 10px}
+.card p{margin:0 0 14px;font-family:Georgia,serif;font-size:17px}
+label{display:block;font-size:14px;color:var(--mute);margin-bottom:6px}
+.row{display:flex;gap:8px}
+input{flex:1;min-width:0;font:600 22px system-ui,sans-serif;text-align:center;text-transform:uppercase;letter-spacing:4px;padding:10px;border:1.5px solid var(--rose);border-radius:12px;background:#fff;color:var(--ink)}
+button{font:600 16px system-ui,sans-serif;padding:10px 20px;border:0;border-radius:12px;background:var(--rose);color:var(--ink);cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.err{min-height:22px;margin:8px 0 0!important;font:14px system-ui,sans-serif!important;color:#B0345F}
+.reset{background:none;color:var(--mute);font-weight:400;font-size:13px;padding:6px 0;margin-top:14px;text-decoration:underline}
+.fin{border:2px solid var(--rose);text-align:center}
+</style>
+</head>
+<body>
+<main>
+<header class="hero">
+<div class="hearts" aria-hidden="true">♥ ♥ ♥</div>
+<h1>Feliz cumpleaños, Jerht</h1>
+<p>Veintidós vueltas al sol y sigues siendo mi lugar favorito. Hoy hay un tesoro escondido en mi casa, y solo tú puedes encontrarlo.</p>
+</header>
+<div class="map">
+<svg viewBox="22 50 336 225" role="img" aria-label="Plano de la casa con el rastro hacia el tesoro">
+<rect x="30" y="60" width="320" height="205" fill="var(--floor)"/>
+<g class="w"><path d="M30 60H350V265H222V205"/><path d="M30 60V240H190"/><path d="M212 240H222V265"/><path d="M30 147H110V115"/><path d="M222 60V118"/><path d="M222 135V142H350"/><path d="M267 142V165"/><path d="M245 185H350"/><path d="M222 185V205"/></g>
+<g class="f"><rect x="150" y="110" width="36" height="26" rx="3"/><rect x="290" y="200" width="44" height="52" rx="3"/><rect x="300" y="68" width="42" height="34" rx="3"/><rect x="34" y="158" width="14" height="46" rx="3"/><rect x="72" y="213" width="40" height="16" rx="3"/></g>
+<text class="rn" x="36" y="75">Cocina</text><text class="rn" x="118" y="75">Comedor</text><text class="rn" x="228" y="75">Cuarto 2</text><text class="rn" x="54" y="172">Sala</text><text class="rn" x="272" y="155">Baño</text><text class="rn" x="228" y="200">Cuarto 1</text>
+<path class="leg" id="leg0" d="M201 243L201 228Q165 198 122 194"/>
+<path class="leg" id="leg1" d="M100 185Q55 165 66 116"/>
+<path class="leg" id="leg2" d="M76 100Q120 80 161 116"/>
+<path class="leg" id="leg3" d="M176 121Q210 118 236 121Q262 112 291 106"/>
+<path class="leg" id="leg4" d="M292 113Q262 132 236 132Q230 160 236 190Q245 205 276 224"/>
+<text class="rn" x="201" y="257" text-anchor="middle">Inicio</text>
+<g class="m" id="m1"><circle cx="110" cy="192" r="10"/><text x="110" y="192" text-anchor="middle" dominant-baseline="central">1</text></g>
+<g class="m" id="m2"><circle cx="66" cy="105" r="10"/><text x="66" y="105" text-anchor="middle" dominant-baseline="central">2</text></g>
+<g class="m" id="m3"><circle cx="168" cy="123" r="10"/><text x="168" y="123" text-anchor="middle" dominant-baseline="central">3</text></g>
+<g class="m" id="m4"><circle cx="300" cy="105" r="10"/><text x="300" y="105" text-anchor="middle" dominant-baseline="central">4</text></g>
+<g class="x" id="m5"><line x1="277" y1="222" x2="297" y2="242"/><line x1="297" y1="222" x2="277" y2="242"/></g>
+</svg>
+</div>
+<section class="card" id="card" aria-live="polite"></section>
+<div style="text-align:center"><button class="reset" id="reset" type="button">Reiniciar juego</button></div>
+</main>
+<script>
+var CODES=["K","22","J","A","30"];
+var CLUES=[
+["Un comienzo suave","Mi amor, hoy empieza tu aventura. Sigue el rastro rosado hasta el rincón donde nos acurrucamos a ver películas. Ahí te espera algo suave, de orejas largas, para que cada paso tuyo sea más tierno. Junto a él hay una tarjetita con un código: guárdalo, es la llave de la siguiente pista."],
+["Sabores y antojos","Tus pies ya van cómodos, exploradora. Ahora sigue el aroma de los antojos hasta el lugar donde se mezclan los sabores. Ahí espera algo rosado que cuida lo frío y lo caliente, y que te acompañará a todas partes."],
+["Una mesa para dos","Vas por buen camino. Ve a la mesa donde nos sentamos frente a frente a compartir la comida. Dos pequeñas compañeras, una rosada y otra plateada, abren puertas sin cerradura, y una historia morada guarda bailes, secretos y escándalos de otra época."],
+["Fuego y fuerza","Casi puedo oírte sonreír. Ve al cuarto que queda junto al comedor. Ahí vive un guerrero de llama naranja, que enciende el fuego del corazón, y una bolsa negra lista para cargar toda tu energía."],
+["Un lugar para soñar","Ya casi, mi vida. El último lugar es un rincón hecho para descansar y soñar. Te espera un abrazo muy grande, con su pequeño amigo azul, y algo más que solo tú y yo podemos completar."]
+];
+var FINAL="Lo lograste, mi amor. Todo esto es para ti, pero el mayor tesoro nunca estuvo en el mapa. Levanta la mirada, pon tus manos en el lienzo junto a las mías y dejemos nuestra huella. Feliz cumpleaños número 22. Te amo.";
+var KEY="tesoro-jerht-n";
+var n=0;
+try{n=parseInt(localStorage.getItem(KEY)||"0",10)||0}catch(e){}
+if(n<0||n>5)n=0;
+function save(){try{localStorage.setItem(KEY,String(n))}catch(e){}}
+function hearts(){var s="";for(var i=0;i<5;i++){s+=i<n?"♥":"<span class=\"off\">♥</span>"}return s}
+function render(){
+  for(var i=0;i<5;i++){document.getElementById("leg"+i).setAttribute("class","leg"+(i<=n?" on":""))}
+  for(var k=1;k<=5;k++){
+    var g=document.getElementById("m"+k);
+    g.setAttribute("class",(k===5?"x":"m")+(k<=n?" done":(k===n+1?" cur":"")));
+    if(k<5){g.querySelector("text").textContent=(k<=n+1)?String(k):"?"}
+  }
+  var c=document.getElementById("card");
+  c.className="card"+(n===5?" fin":"");
+  if(n===5){
+    c.innerHTML="<div class=\"prog\" aria-hidden=\"true\">"+hearts()+"</div><h2>Encontraste el tesoro</h2><p></p>";
+    c.querySelector("p").textContent=FINAL;
+    return;
+  }
+  c.innerHTML="<div class=\"prog\" aria-label=\"Progreso: "+n+" de 5\">"+hearts()+"</div><h2></h2><p></p><label for=\"code\">Código de la tarjetita que viene con el regalo</label><div class=\"row\"><input id=\"code\" maxlength=\"3\" autocomplete=\"off\" autocapitalize=\"characters\"><button id=\"go\" type=\"button\">Abrir</button></div><p class=\"err\" id=\"err\"></p>";
+  c.querySelector("h2").textContent=CLUES[n][0];
+  c.querySelector("p").textContent=CLUES[n][1];
+  var input=document.getElementById("code"),err=document.getElementById("err");
+  function tryCode(){
+    var v=input.value.trim().toUpperCase();
+    if(!v){err.textContent="Escribe el código de la tarjetita.";return}
+    if(v===CODES[n]){n++;save();render();window.scrollTo({top:0,behavior:"smooth"})}
+    else{err.textContent="Ese no es. Revisa bien la tarjetita del regalo."}
+  }
+  document.getElementById("go").onclick=tryCode;
+  input.onkeydown=function(e){if(e.key==="Enter")tryCode()};
+  input.oninput=function(){err.textContent=""};
+}
+var rb=document.getElementById("reset"),rt=null;
+rb.onclick=function(){
+  if(rt){clearTimeout(rt);rt=null;rb.textContent="Reiniciar juego";n=0;save();render();window.scrollTo({top:0});return}
+  rb.textContent="Toca otra vez para reiniciar";
+  rt=setTimeout(function(){rt=null;rb.textContent="Reiniciar juego"},4000);
+};
+render();
+</script>
+</body>
+</html>
